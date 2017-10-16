@@ -3,3 +3,4 @@ intel/linux-2.6-intel-iommu-igfx.patch
 intel/bytmax.patch
 overload-on-wakeup.patch
 security/0001-Sync-Ubuntu-Artful-jj-s-kernel-s-apparmor-4.13-outof.patch
+x230-screen-and-aspm.patch
