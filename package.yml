@@ -1,4 +1,4 @@
-name       : linux-current
+name       : linux-x230-fhd
 version    : 5.2.9
 release    : 125
 source     :
@@ -9,8 +9,8 @@ component  :
     - kernel.image
     - headers : kernel.devel
 summary    :
-    - Linux kernel image and modules (current)
-    - headers : Linux kernel headers (current)
+    - Linux kernel image and modules (x230-fhd)
+    - headers : Linux kernel headers (x230-fhd)
 description:
     - The Linux kernel and modules, the core of the operating system
     - headers : Headers required for building out of tree kernel modules
@@ -40,7 +40,7 @@ replaces   :
 setup      : |
     %apply_patches
     # Set the version
-    extraVersion="-${release}.current"
+    extraVersion="-${release}.x230-fhd"
     sed -e "s/EXTRAVERSION =.*/EXTRAVERSION = $extraVersion/" -i Makefile
 
     # Ensure config is valid
@@ -51,8 +51,8 @@ build      : |
     %make -C tools/objtool
 install    : |
     # Install kernel blob
-    kernID="com.solus-project.current"
-    kversion="${version}-${release}.current"
+    kernID="com.solus-project.x230-fhd"
+    kversion="${version}-${release}.x230-fhd"
     install -D -m 0755 arch/x86/boot/bzImage $installdir/usr/lib/kernel/$kernID.${version}-${release}
 
     # Install additional files
@@ -67,8 +67,8 @@ install    : |
     # Remove broken links
     rm -v $installdir/lib/modules/${kversion}/{source,build}
 
-    # Mark this as the default "current" kernel
-    ln -sv $kernID.${version}-${release} $installdir/usr/lib/kernel/default-current
+    # Mark this as the default "x230-fhd" kernel
+    ln -sv $kernID.${version}-${release} $installdir/usr/lib/kernel/default-x230-fhd
 
     # Fix mods
     depmod -b $installdir/ $kversion -a
