@@ -1,0 +1,19 @@
+#!/bin/sh
+
+config_value()
+{
+    local setting="$1"
+    grep "^${setting}\>" package.yml | awk '{ print $3 }'
+}
+
+set -e
+
+PACKAGE_NAME=$(config_value name)
+PACKAGE_VERSION="$(config_value version)-$(config_value release)"
+TAG="${PACKAGE_NAME}-${PACKAGE_VERSION}"
+
+git tag -m "linux-current-${PACKAGE_VERSION} patched for ThinkPad X230" $TAG
+
+echo "Created $TAG"
+echo
+echo "When you're happy with this kernel... git push github"
